@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Number Guessing Game</title>
+<style>
+body {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 50px;
+}
+#game-container {
+  width: 350px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+</style>
+</head>
+<body>
+<div id="game-container">
+  <h1>Number Guessing Game</h1>
+  <p>I'm thinking of a number between 1 and 100.</p>
+  <input type="number" id="guess" min="1" max="100" disabled>
+  <button onclick="checkGuess()" disabled>Guess</button>
+  <button onclick="resetGame()">Reset Game</button>
+  <p id="message"></p>
+  <p id="guesses">Guesses: 0</p>
+</div>
+
+<table>
+  <tr>
+      <th colspan="2"><h1>Games Currently Avaliable</h1></th>
+  </tr>
+  <tr>
+      <td><a href="games.html">To Main</a></td>
+      <td><a href="Guess The Number.html">Guess The Number</a></td>
+  </tr>
+</table>
+
+<script>
+let secretNumber;
+let guessesTaken = 0;
+let gameActive = false;
+
+function startGame() {
+  secretNumber = Math.floor(Math.random() * 100) + 1;
+  guessesTaken = 0;
+  document.getElementById("guess").disabled = false;
+  document.getElementById("guess").value = '';
+  document.querySelector('button:first-of-type').disabled = false;
+  document.getElementById("message").textContent = "";
+  document.getElementById("guesses").textContent = "Guesses: 0";
+  gameActive = true;
+}
+
+function checkGuess() {
+  if (!gameActive) return; //Prevent guessing if game isn't active
+
+  let guess = parseInt(document.getElementById("guess").value);
+  guessesTaken++;
+  document.getElementById("guesses").textContent = "Guesses: " + guessesTaken;
+
+  if (isNaN(guess) || guess < 1 || guess > 100) {
+    document.getElementById("message").textContent = "Please enter a valid number between 1 and 100.";
+  } else if (guess < secretNumber) {
+    document.getElementById("message").textContent = "Too low! Try again.";
+  } else if (guess > secretNumber) {
+    document.getElementById("message").textContent = "Too high! Try again.";
+  } else {
+    document.getElementById("message").textContent = "Congratulations! You guessed the number in " + guessesTaken + " guesses!";
+    document.getElementById("guess").disabled = true;
+    document.querySelector('button:first-of-type').disabled = true;
+    gameActive = false;
+  }
+}
+
+function resetGame() {
+  startGame();
+}
+
+startGame(); //Start the game automatically on page load
+</script>
+
+</body>
+</html>

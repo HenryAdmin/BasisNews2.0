@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Coin Toss</title>
+        <style>
+            select
+            {
+                margin-bottom: 1rem;
+                display: block;
+            }
+
+            #user_answer, #comp_answer, #print_outcome
+            {
+                margin-top: 1rem;
+            }
+            fieldset {
+                background-color: aqua;
+                color: aliceblue;
+                text-align: center;
+                margin: auto;
+                width: 80%;
+                font-family: cursive;
+            }
+            body {
+                background-color: aqua;
+            }
+        </style>
+        <script>
+            function coinToss()
+            {
+                randNum = Math.floor(Math.random() * 2);
+                console.log(randNum);
+                selectOpt = document.getElementById("outcome");
+                selectedValue = selectOpt.options[selectOpt.selectedIndex].value;
+                console.log(selectedValue);
+                returnUserAns = "You selected " + selectedValue;
+                document.getElementById("user_answer").innerHTML = returnUserAns;
+                if(randNum == 0)
+                {
+                    randNum = 'heads';
+                }
+                else
+                {
+                    randNum = 'tails';
+                }
+                returnCompAns = "The computer selected " + randNum;
+                document.getElementById("comp_answer").innerHTML = returnCompAns;
+                if(selectedValue == 'heads' && randNum == 'heads')
+                {
+                    returnResult = "Congratulations, you guessed the outcome correctly. ";
+                    document.getElementById("print_outcome").innerHTML = returnResult;
+                }
+                else if(selectedValue == 'tails' && randNum == 'tails')
+                {
+                    returnResult = "Congratulations, you guessed the outcome correctly. ";
+                    document.getElementById("print_outcome").innerHTML = returnResult;
+                }
+                else
+                {
+                    returnResult = "Unfortunately, you did not guess the outcome correctly. ";
+                    document.getElementById("print_outcome").innerHTML = returnResult;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Coin Toss Game</h2>
+        <p>Please select the outcome: </p>
+        <select id="outcome">
+            <option value="" disabled selected>Select an Option</option>
+            <option value="heads">Heads</option>
+            <option value="tails">Tails</option>
+        </select>
+        <input type="button" value="Flip Coin" onclick="coinToss()">
+        <div id="user_answer"></div>
+        <div id="comp_answer"></div>
+        <div id="print_outcome"></div>
+
+        <table>
+            <tr>
+                <th colspan="2"><h1>Games Currently Avaliable</h1></th>
+            </tr>
+            <tr>
+                <td><a href="games.html">To Main</a></td>
+                <td><a href="Coin Toss.html">Coin Toss</a></td>
+            </tr>
+          </table>
+    </body>
+</html>
